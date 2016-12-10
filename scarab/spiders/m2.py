@@ -1,21 +1,26 @@
-import calendar
-import datetime as dt
-import scrapy
+import urlparse
 
-BASE_URL = 'http://media.motorsportmagazine.com/archive'
-START = 1950
-END = dt.date.today().year + 1
+from scrapy.spiders import CrawlSpider
+from scrapy.spiders import Rule
+from scrapy.linkextractors import LinkExtractor as sle
 
 
-class M2Spider(scrapy.Spider):
+class M2Spider(CrawlSpider):
     name = 'm2'
-    
-    def start_requests(self):
-        for year in range(START, END):
-            for month in calendar.month_name[1:13]:
-                url = '%s/%s-%s/full/1.jpg' % (BASE_URL, month.lower(), year)
-                self.logger.info('Request for %s' % url)
-                yield scrapy.Request(url, self.parse)
+    allowed_domains = ['motorsportmagazine.com']
+    start_urls = [
+        'http://www.motorsportmagazine.com/archive/issues/all'
+    ]
+    rules = [
+        Rule(sle(allow=('/archive/issues/*')),
+             callback='parse_0', follow=True),
+        Rule(sle(allow=('/archive/issue/*')),
+             callback='parse_1', follow=True),
+             
+    ]
 
-    def parse(self, response):
+    def parse_0(self, response):
+        self.logger.info('Response from %s' % response.url)
+
+    def parse_1(self, response):
         self.logger.info('Response from %s' % response.url)
