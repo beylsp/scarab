@@ -11,4 +11,4 @@ Usage
 
 .. code-block:: bash
 
-    $> scrapy crawl m2
+    $> scrapy crawl m2 --set IMAGES_STORE=<path/to/store>

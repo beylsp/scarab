@@ -87,3 +87,6 @@ ENV/
 
 # Rope project settings
 .ropeproject
+
+# Default m2 image store
+m2/
