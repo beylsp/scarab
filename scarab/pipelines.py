@@ -38,7 +38,7 @@ class PdfPipeline(object):
                 spider.logger.info('Process pdf for %s' % im)
                 n, _ = os.path.splitext(im)
                 try:
-                    Image.open(im).save('%s.pdf' % n)
+                    image = Image.open(im).save('%s.pdf' % n)
                 except Exception, err:
                     raise ValueError('Error converting %s: %s' % (im, err))
 
