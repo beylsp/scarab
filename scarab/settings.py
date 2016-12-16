@@ -66,7 +66,6 @@ COOKIES_ENABLED = False
 # See http://scrapy.readthedocs.org/en/latest/topics/item-pipeline.html
 ITEM_PIPELINES = {
      'scarab.pipelines.ImagesPipeline': 1,
-     'scarab.pipelines.PdfPipeline': 10,
 }
 
 IMAGES_STORE = 'm2'
